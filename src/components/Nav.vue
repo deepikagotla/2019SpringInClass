@@ -21,24 +21,26 @@
                     <router-link class="nav-link disabled" to="#"  active-class="active">Disabled</router-link>
                 </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0" v-if="!user">
-                <a href="#" class="nav-link" @click.prevent="login">Login</a>
-                <a href="#" class="nav-link">Sign Up</a>
+            <form class="form-inline mt-2 mt-md-0" v-if="!Globals.user">
+                <router-link to="/Login" class="nav-link">Login</router-link>
+                <router-link to="/Register" class="nav-link">Sign Up</router-link>
             </form>
-            <span class="navbar-text" v-if="user">Welcome {{user.name}}</span>
+            <span class="navbar-text" v-if="Globals.user">
+                <img width="30" :src="`https://graph.facebook.com/${Globals.oAuthUser.id}/picture`" />
+                Welcome {{Globals.user.FirstName}} {{Globals.user.LastName}}
+            </span>
         </div>
     </nav>
 </template>
 
 <script>
+import { Globals } from "@/models/api";
 export default {
     data: ()=>({
-        user: null
+        Globals: Globals
     }),
     methods: {
-        login(){
-            this.user = { name: "Easwaren" };
-        }
+        
     }
 }
 </script>

@@ -19,7 +19,14 @@ app.post("/", (req, res, next) => {
     .catch(next)
 });
 app.post("/login", (req, res, next) => {
+    //console.log({body: req.body})
     user.login(req.body.email, req.body.password)
+    .then(x=>  res.send(x) )
+    .catch(next)
+});
+app.post("/facebookLogin", (req, res, next) => {
+    //console.log({body: req.body})
+    user.facebookLogin(req.body.token)
     .then(x=>  res.send(x) )
     .catch(next)
 });
